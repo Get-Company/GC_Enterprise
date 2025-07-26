@@ -1,0 +1,118 @@
+<html>
+<head>
+    <style>
+        body {
+            font-size: 18px;
+        }
+        .small-text {
+            font-size: 14px;
+        }
+        @page {
+            size: a4 portrait;
+            @frame header_frame {
+            /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 1cm; width: 19cm; top: 1cm; height: 9cm;
+        }
+            @frame content_frame {
+            /* Content Frame */
+            left: 1cm; width: 19cm; top: 10cm; height: 12cm;
+        }
+            @frame footer_frame {
+            /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 1cm; width: 19cm; top: 23cm; height: 5cm;
+        }
+        }
+    </style>
+</head>
+
+<body>
+<!-- Content for Static Frame 'header_frame' -->
+<div id="header_content">
+    <table>
+        <tr>
+            <td>
+                <img src="media/{{ order.company.logo }}" alt="{{ order.company.name }}">
+            </td>
+            <td style="text-align: center; font-size: 30px; font-weight: bold">{{ order.nr }}</td>
+            <td style="text-align: right;">
+                <strong>{{ order.company.name }}</strong><br/>
+                {{ order.company.street }}<br/>
+                {{ order.company.postal_code }} {{ order.company.city }}<br/>
+                {{ order.company.country }}<br/><br/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Content Frame -->
+<div id="content_frame">
+<p>
+    <strong>{{ order.customer.name }}</strong><br/>
+    {{ order.customer.street }} {{ order.customer.house_number }}<br/>
+    {{ order.customer.postal_code }} {{ order.customer.city }}
+</p>
+    <table border="1" width="100%" cellpadding="5">
+        <thead>
+        <tr>
+            <th width="15%">Position</th>
+            <th width="50%">Aufgabe</th>
+            <th width="15%">Aufwand/h</th>
+            <th width="20%">Beträge (€)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <strong>{{ task.name }}</strong><br/>
+                    {{ task.description }}
+                </td>
+                <td>{{ task.hours_worked|floatformat:2 }} h</td>
+                <td>
+                    {{ task.net_sum|floatformat:2 }} €<br/>
+                    <span class="small-text">MwSt: {{ task.vat_sum|floatformat:2 }} €</span><br/>
+                    <span class="small-text">Brutto: {{ task.gross_sum|floatformat:2 }} €</span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Content for Static Frame 'footer_frame' -->
+<div id="footer_content">
+    <!-- Erste Tabelle: Banken, Fälligkeitsdatum und Summe -->
+    <table width="100%" cellpadding="5" border="0">
+        <tr>
+            <td width="50%">
+                <strong>Bank:</strong>
+                {% for bank in order.company.banks.all %}
+                    {{ bank.bank_name }} (IBAN: {{ bank.iban }}, BIC: {{ bank.bic }})<br/>
+                {% endfor %}
+            </td>
+            <td width="25%" style="text-align: center;">
+                Bitte überweisen Sie Brutto: {{ total_gross_sum|floatformat:2 }} € bis zum {{ due_to|date:"d.m.Y" }}
+            </td>
+            <td width="25%" style="text-align: right;">
+                <strong>Netto-Betrag:</strong> {{ total_net_sum|floatformat:2 }} €<br/>
+                <span class="small-text">MwSt: {{ total_vat|floatformat:2 }} €</span><br/>
+                <span class="small-text">Brutto: {{ total_gross_sum|floatformat:2 }} €</span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Zweite Tabelle: Seitenzahl -->
+    <table width="100%" cellpadding="5" border="0">
+        <tr>
+            <td style="text-align: right;">
+                Seite <pdf:pagenumber> von <pdf:pagecount>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

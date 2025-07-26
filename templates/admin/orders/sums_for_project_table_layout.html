@@ -1,0 +1,80 @@
+{% load humanize %}
+<div style="margin-top: 50px; margin-bottom: 20px;">
+    <table style="width: 70%; border-collapse: collapse; margin: 20px 0;">
+        <thead>
+        <tr style="border-bottom: 2px solid #ddd;">
+            <th style="width: 20%;text-align: left; padding: 10px;">Position</th>
+            <th style="width: 60%;text-align: left; padding: 10px;">Beschreibung</th>
+            <th style="width: 20%;text-align: right; padding: 10px;">Betrag</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for osp in original.order_service_phases.all %}
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 10px; font-weight: bold;">{{ osp.get_inline_title }}</td>
+                <td style="padding: 10px;">{{ osp.name|safe }}</td>
+                <td style="padding: 10px; text-align: right;">
+                    {% if osp.rebate %}
+                        Summe: {{ osp.sum_amount|floatformat:2 }} €<br/>
+                        Rabatt ({{ osp.rebate }} %): {{ osp.sum_rebate_amount|floatformat:2 }} €<br/>
+                        <strong>Netto: {{ osp.sum_total_amount|floatformat:2 }} €</strong>
+                    {% else %}
+                        <strong>Netto: {{ osp.sum_amount|floatformat:2 }} €</strong>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr style="border-top: 2px solid #ddd; background-color: #f9f9f9;">
+            <td style="padding: 10px; font-weight: bold;">Summe Leistungsphasen:</td>
+            <td></td>
+            <td style="padding: 10px; text-align: right;">
+                {% if original.sum_total_rebate_service_phases %}
+                    Summe: {{ original.total_service_phases_without_rebate|floatformat:2 }} €<br/>
+                    abzgl. Rabatt: {{ original.sum_total_rebate_service_phases|floatformat:2 }} €<br/>
+                {% endif %}
+                Netto: {{ original.total_service_phases|floatformat:2 }} €
+            </td>
+        </tr>
+        {% for line_item in original.line_items.all %}
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 10px; font-weight: bold;">{{ line_item.name }}</td>
+                <td></td>
+                <td style="padding: 10px; text-align: right;">Summe: {{ line_item.amount|floatformat:2 }} €</td>
+            </tr>
+        {% endfor %}
+        <tr style="border-top: 2px solid #ddd; background-color: #f9f9f9;">
+            <td style="padding: 10px; font-weight: bold;">Summe Besondere Leistungen:</td>
+            <td></td>
+            <td style="padding: 10px; text-align: right;">{{ original.total_line_items|floatformat:2 }} €</td>
+        </tr>
+        <tr style="border-top: 2px solid #ddd; background-color: #f9f9f9;">
+            <td style="padding: 10px; font-weight: bold;">Summe Pauschalen:</td>
+            <td></td>
+            <td style="padding: 10px; text-align: right;">{{ original.total_flat_fees|floatformat:2 }} €</td>
+        </tr>
+        {% if original.additional_costs %}
+            <tr style="border-top: 2px solid #ddd; background-color: #f9f9f9;">
+                <td style="padding: 10px; font-weight: bold;">Nebenkosten:</td>
+                <td></td>
+                <td style="padding: 10px; text-align: right;">{{ original.total_additional_costs|floatformat:2 }} €</td>
+            </tr>
+        {% endif %}
+        {% if original.km %}
+            <tr style="border-top: 2px solid #ddd; background-color: #f9f9f9;">
+                <td style="padding: 10px; font-weight: bold;">Fahrtkosten ({{ original.km|floatformat:2 }} km x {{ original.km_cost|floatformat:2 }} €):</td>
+                <td></td>
+                <td style="padding: 10px; text-align: right;">{{ original.total_km_costs|floatformat:2 }} €</td>
+            </tr>
+        {% endif %}
+        <tr style="border-top: 3px solid #ddd; background-color: #f3f3f3;">
+            <td style="padding: 10px; font-weight: bold;">Summe:</td>
+            <td></td>
+            <td style="padding: 10px; text-align: right;">
+                Netto: {{ original.total_net|floatformat:2 }} €<br/>
+                Mwst: {{ original.total_vat|floatformat:2 }} €<br/>
+                <strong>Brutto: {{ original.total_gross|floatformat:2 }} €</strong>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

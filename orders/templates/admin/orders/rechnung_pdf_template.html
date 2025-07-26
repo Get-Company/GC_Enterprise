@@ -1,0 +1,124 @@
+<html>
+<head>
+    <style>
+        body {
+            font-size: 18px;
+        }
+        .small-text {
+            font-size: 14px;
+        }
+        @page {
+            size: a4 portrait;
+            @frame header_frame {
+            -pdf-frame-content: header_content;
+            left: 1cm; width: 19cm; top: 1cm; height: 9cm;
+        }
+            @frame content_frame {
+            left: 1cm; width: 19cm; top: 10cm; height: 12cm;
+        }
+            @frame footer_frame {
+            -pdf-frame-content: footer_content;
+            left: 1cm; width: 19cm; top: 23cm; height: 5cm;
+        }
+        }
+    </style>
+</head>
+{% set ns = namespace (items_index = 1) %} <!-- Initialisierung des globalen Index -->
+<body>
+<!-- Header-Frame -->
+<div id="header_content">
+    <table>
+        <tr>
+            <td>
+                <img src="media/{{ order.company.logo }}" alt="{{ order.company.name }}">
+            </td>
+            <td style="text-align: center; font-size: 30px; font-weight: bold">
+                Rechnung {{ order.nr }}
+            </td>
+            <td style="text-align: right;">
+                <strong>{{ order.company.name }}</strong><br/>
+                {{ order.company.street }}<br/>
+                {{ order.company.postal_code }} {{ order.company.city }}<br/>
+                {{ order.company.country }}<br/><br/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Content-Frame -->
+<div id="content_frame">
+    <p>
+        <strong>{{ order.customer.name }}</strong><br/>
+        {{ order.customer.street }} {{ order.customer.house_number }}<br/>
+        {{ order.customer.postal_code }} {{ order.customer.city }}
+    </p>
+    <table border="1" width="100%" cellpadding="5">
+        <thead>
+        <tr>
+            <th width="15%">Position</th>
+            <th width="50%">Leistung</th>
+            <th width="15%">Aufwand <br><span class="small-text">(h/{{ order.hourly_rate|currency }})</span></th>
+            <th width="20%">Betrag (€)</th>
+        </tr>
+        </thead>
+        <tbody class="small-text">
+        {% for task in tasks %}
+            <tr>
+                <td>{{ ns.items_index }}</td>
+                <td>
+                    <strong>{{ task.name }}</strong><br/>
+                    {{ task.description }}
+                </td>
+                <td>{{ task.hours_worked }} h</td>
+                <td>
+                    {{ task.net_sum|currency }}
+                </td>
+            </tr>
+            {% set ns.items_index = ns.items_index + 1 %}
+        {% endfor %}
+        {% if line_items %}
+            {% for line_item in line_items %}
+                <tr>
+                <td>{{ ns.items_index }}</td>
+                <td>
+                    {{ line_item.name }}
+                </td>
+                <td></td>
+                <td>{{ line_item.amount|currency }}
+                {% set ns.items_index = ns.items_index + 1 %}
+            {% endfor %}
+        {% endif %}
+    </table>
+</div>
+
+<!-- Footer-Frame -->
+<div id="footer_content">
+    <table width="100%" cellpadding="5" border="0">
+        <tr>
+            <td class="small-text" width="50%" >
+                Bitte überweisen Sie den Bruttobetrag in Höhe von <strong>{{ total_gross_sum|currency }}</strong>
+                bis zum {{ due_to|german_date("%a, den %d.%b.%Y") }}.
+            </td>
+            <td width="50%" style="text-align: right;">
+                <strong>Netto:</strong> {{ total_net_sum|currency }}<br/>
+                <span class="small-text">MwSt: {{ total_vat|currency }}</span><br/>
+                <span class="small-text">Brutto: {{ total_gross_sum|currency }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" >
+                <strong>Bankverbindung:</strong><br/>
+                {% for bank in banks %}
+                    {{ bank.bank_name }} – IBAN: {{ bank.iban }}, BIC: {{ bank.bic }}<br/>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right;">
+                Seite <pdf:pagenumber> von <pdf:pagecount>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

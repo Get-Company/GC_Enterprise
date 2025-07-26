@@ -1,0 +1,132 @@
+2024-12-14 10:46:50,484 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 10:47:11,838 WARNING django.request Not Found: /
+2024-12-14 10:47:12,232 WARNING django.request Not Found: /favicon.ico
+2024-12-14 10:50:03,984 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\urls.py changed, reloading.
+2024-12-14 10:50:08,576 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 10:50:23,401 WARNING django.request Not Found: /admin/orders/test_log
+2024-12-14 10:52:58,690 WARNING django.request Not Found: /orders/test_log
+2024-12-14 10:54:43,954 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\urls.py changed, reloading.
+2024-12-14 10:54:46,351 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 10:54:47,885 WARNING django.request Not Found: /orders/test_log
+2024-12-14 10:55:03,104 WARNING django.request Not Found: /orders/test_log/
+2024-12-14 10:58:06,428 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\urls.py changed, reloading.
+2024-12-14 10:58:09,208 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 10:58:23,649 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 10:58:30,073 DEBUG orders.views DEBUG-Log aus log_test wurde erzeugt.
+2024-12-14 10:58:30,074 INFO orders.views INFO-Log aus log_test wurde erzeugt.
+2024-12-14 10:58:30,074 ERROR orders.views ERROR-Log aus log_test wurde erzeugt.
+2024-12-14 11:03:26,415 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\models.py changed, reloading.
+2024-12-14 11:03:28,629 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 11:05:01,105 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\models.py changed, reloading.
+2024-12-14 11:05:03,401 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 11:05:28,219 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\models.py changed, reloading.
+2024-12-14 11:05:41,047 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 11:06:14,104 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\models.py changed, reloading.
+2024-12-14 11:06:25,872 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 11:06:35,035 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\models.py changed, reloading.
+2024-12-14 11:06:42,715 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 11:07:03,312 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\models.py changed, reloading.
+2024-12-14 11:07:12,480 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 11:07:26,909 INFO django.utils.autoreload D:\python\GC_Enterprise\orders\models.py changed, reloading.
+2024-12-14 11:07:34,007 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 12:00:08,952 INFO django.utils.autoreload D:\python\GC_Enterprise\GC_Enterprise\settings.py changed, reloading.
+2024-12-14 12:00:13,775 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 12:00:24,928 INFO django.utils.autoreload D:\python\GC_Enterprise\logviewer\models.py changed, reloading.
+2024-12-14 12:00:30,693 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 12:00:59,130 INFO django.utils.autoreload D:\python\GC_Enterprise\logviewer\admin.py changed, reloading.
+2024-12-14 12:01:04,749 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 12:03:15,160 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 12:17:10,805 INFO django.utils.autoreload D:\python\GC_Enterprise\GC_Enterprise\settings.py changed, reloading.
+2024-12-14 12:17:13,459 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 12:17:22,562 INFO django.utils.autoreload Watching for file changes with StatReloader
+2024-12-14 12:17:35,420 WARNING django.request Not Found: /
+2024-12-14 12:17:51,922 DEBUG orders.models Cleaning Order [ID: 12].
+2024-12-14 12:17:51,922 INFO orders.models Order [ID: 12] passed validation.
+2024-12-14 12:17:57,044 INFO orders.models Start creating PDF for Document [ID: 3, Type: Angebot, Order ID: 12]
+2024-12-14 12:17:57,044 INFO orders.models Generating Angebot PDF for Document [ID: 3, Order ID: 12].
+2024-12-14 12:17:57,615 DEBUG orders.models Rendering PDF for Document [ID: 3] with context: {'document': <Document: Angebot für Projekt 24-002: IEB Care GmbH & Co. KG>, 'order': <Order: 24-002 | IEB Care GmbH & Co. KG>, 'grouped_phases': {'Architektur': [<OrderServicePhase: LPH1>, <OrderServicePhase: LPH2>], 'Tragwerksplanung': [<OrderServicePhase: LPH2>, <OrderServicePhase: LPH3>, <OrderServicePhase: LPH4>, <OrderServicePhase: LPH5>, <OrderServicePhase: LPH5>]}, 'customer': <Customer: IEB Care GmbH & Co. KG>, 'total_net_sum': Decimal('14054.250000000'), 'total_vat': Decimal('2670.30750000000'), 'total_gross_sum': Decimal('16724.55750000000'), 'due_to': datetime.datetime(2024, 12, 1, 21, 51, 44, 516269, tzinfo=datetime.timezone.utc)}.
+2024-12-14 12:17:57,615 INFO orders.models Starting PDF generation for Document [ID: 3, File Name: 24-002-Angebot-2024-12-14.pdf].
+2024-12-14 12:17:58,409 DEBUG orders.models HTML rendered for Document [ID: 3, Template: admin/orders/angebot_pdf_template.html].
+2024-12-14 12:17:58,409 DEBUG xhtml2pdf.document pisaDocument options:
+  src = '<html>\n<head>\n    <meta charset="UTF-8">\n    <style>\n        @page {\n            size: a4 portrait;\n            @frame header_frame {\n            -pdf-frame-content: header_content;\n            left: 2cm;\n            width: 17cm;\n            top: 1cm;\n            height: 6cm;\n        }\n            @frame content_frame {\n            left: 2cm;\n            width: 17cm;\n            top: 7cm;\n            height: 17cm;\n        }\n            @frame footer_frame {\n            -pdf-frame-content: footer_content;\n            left: 2cm;\n            width: 17cm;\n            top: 25cm;\n            height: 4cm;\n        }\n        }\n        body {\n            font-size: 14px;\n        }\n        #order_company {\n            font-size: 12px;\n            color: #888888;\n            margin-top: 40px;\n        }\n        #footer_content {\n            color: #888888;\n        }\n    </style>\n</head>\n<body>\n<!-- Header -->\n<div id="header_content">\n    \n    <img width="300px" style="text-align:right" src="media/company/company_logos/IBR_Riesemann_GmbH_Logo.jpg" alt="IB Riesemann GmbH">\n    \n    <p id="order_company">\n        IB Riesemann GmbH Dipl.-Ing.  Mathias Riesemann B.Sc.<br/>\n        Adelholzener Str. 34  Siegsdorf Deutschland\n    </p>\n</div>\n\n<!-- Footer -->\n<div id="footer_content">\n    <table>\n        <tr>\n            <td width="80%">\n                <p>\n                    IB Riesemann GmbH\n                     | HRB 22261\n                     | Amtsgericht Traunstein\n                     | Geschäftsführer Dipl.-Ing.  Mathias Riesemann B.Sc.\n                    <br/>\n                    Adelholzener Str. 34 | 83313 Siegsdorf | Deutschland\n                    <br/>\n                    Tel.<a href="tel:+4986624850000">+4986624850000</a> |\n                    E-Mail: <a href="mailto:info@ib-riesemann.de">info@ib-riesemann.de</a>\n                </p>\n            </td>\n            <td width="20%" style="text-align: right; vertical-align: bottom;">\n                Seite <pdf:pagenumber> von <pdf:pagecount>\n            </td>\n        </tr>\n    </table>\n</div>\n\n<!-- Main Content -->\n<p>\n    An:<br/>\n    IEB Care GmbH & Co. KG<br/>\n    \n    Reitstraße 59<br/>\n    83236 Übersee<br/>\n    <strong>Deutschland</strong>\n</p>\n<p style="text-align: right;">\n    Siegsdorf am Sa, den 14.Dez.2024\n</p>\n<p><strong>Neubau von Seniorenwohnheimen – Gebäudeplanung</strong></p>\n<p> Sehr geehrte Damen und Herren,  <br>zu o.g. Bauvorhaben m&ouml;chte ich Ihnen gerne folgendes Angebot unterbreiten.</p>\n\n<!-- Tabelle -->\n<table style="border: thin solid #888;" width="100%" cellpadding="5" border="1">\n    <tr>\n        <th width="10%">Pos</th>\n        <th width="70%">Beschreibung</th>\n        <th width="20%">Kosten [€] netto</th>\n    </tr>\n     <!-- Initialisierung des globalen Index -->\n\n    <!-- Gruppierte Phasen -->\n    \n    \n        <!-- Gruppenüberschrift (nur anzeigen, wenn es mehrere Gruppen gibt) -->\n        \n            <tr>\n                <td colspan="3"><strong>Architektur</strong></td>\n            </tr>\n        \n\n        <!-- Einträge der Gruppe -->\n        \n            \n            <tr>\n                <td>1</td>\n                <td>LPH1:<p>Grundlagenermittlung 2%</p></td>\n                <td style="text-align: right">200,00 €</td>\n            </tr>\n        \n            \n            <tr>\n                <td>2</td>\n                <td>LPH2:<p>Test mit Architektur III und LPH 1</p></td>\n                <td style="text-align: right">2.000,00 €</td>\n            </tr>\n        \n    \n        <!-- Gruppenüberschrift (nur anzeigen, wenn es mehrere Gruppen gibt) -->\n        \n            <tr>\n                <td colspan="3"><strong>Tragwerksplanung</strong></td>\n            </tr>\n        \n\n        <!-- Einträge der Gruppe -->\n        \n            \n            <tr>\n                <td>3</td>\n                <td>LPH2:<p>Vorplanung 7% abzgl. Kostensch&auml;tzung 0.5% = 6,5%</p></td>\n                <td style="text-align: right">1.300,00 €</td>\n            </tr>\n        \n            \n            <tr>\n                <td>4</td>\n                <td>LPH3:<p>Entwurfsplanung 15% abzgl. Kostenberechnung 1,5% = 13,5%</p></td>\n                <td style="text-align: right">3.000,00 €</td>\n            </tr>\n        \n            \n            <tr>\n                <td>5</td>\n                <td>LPH4:<p>Genehmigungsplanung 3%</p></td>\n                <td style="text-align: right">600,00 €</td>\n            </tr>\n        \n            \n            <tr>\n                <td>6</td>\n                <td>LPH5:<p>Ausf&uuml;hrungsplanung 25 %</p></td>\n                <td style="text-align: right">5.000,00 €</td>\n            </tr>\n        \n            \n            <tr>\n                <td>7</td>\n                <td>LPH5:<p>Test mit Architektur III und LPH 5</p></td>\n                <td style="text-align: right">3.000,00 €</td>\n            </tr>\n        \n    \n\n    <!-- Rabatt -->\n    \n        \n        <tr>\n            <td>8</td>\n            <td>Nachlass</td>\n            <td style="text-align: right">- 1.715,00 €</td>\n        </tr>\n    \n\n    <!-- Besondere Leistungen -->\n    \n        \n            \n            <tr>\n                <td>9</td>\n                <td><p>Besondere Leistungen: Sonnenstudie etc. &ndash; Abrechnung auf Stundenbasis 85,00 &euro;/h</p></td>\n                <td style="text-align: right">-</td>\n            </tr>\n        \n    \n\n    <!-- Nebenkosten -->\n    \n        \n        <tr>\n            <td>10</td>\n            <td>Nebenkosten pauschal 5.00%</td>\n            <td style="text-align: right">669,25 €</td>\n        </tr>\n    \n\n    <!-- Fahrtkosten -->\n    \n\n    <!-- Summen -->\n    <tr>\n        <td></td>\n        <td><strong>Summe netto</strong></td>\n        <td style="text-align: right">14.054,25 €</td>\n    </tr>\n    <tr>\n        <td></td>\n        <td><strong>MwSt. 19%</strong></td>\n        <td style="text-align: right">2.670,31 €</td>\n    </tr>\n    <tr>\n        <td></td>\n        <td><strong>Summe brutto</strong></td>\n        <td style="text-align: right">16.724,56 €</td>\n    </tr>\n</table>\n\n\n<!-- Schluss -->\n\n    <p class="MsoNormal" style="text-align: left;" align="left">Annahme: F&uuml;r besondere Leistungen wird zus&auml;tzlicher Zeitaufwand nach Stunden (85.00&euro;/h netto +5% NK + 0,50&euro;/km) abgerechnet.</p>\n\n\n<p>Mit freundlichen Grüßen</p>\n<p>\n    <img width="300px" src="media/company/company_logos/signature.png" alt="IB Riesemann GmbH"><br/>\n    Dipl.-Ing.  Mathias Riesemann B.Sc.\n</p>\n</body>\n</html>'
+  dest = <_io.BytesIO object at 0x0000026F3D3C2ED0>
+  path = ''
+  link_callback = None
+  xhtml = False
+  context_meta = None
+2024-12-14 12:17:58,448 DEBUG xhtml2pdf.files FileObject 'media/company/company_logos/IBR_Riesemann_GmbH_Logo.jpg', Basepath: 'D:\\python\\GC_Enterprise\\__dummy__'
+2024-12-14 12:17:58,448 DEBUG xhtml2pdf.files URLParts: ParseResult(scheme='d', netloc='', path='\\python\\GC_Enterprise\\__dummy__', params='', query='', fragment=''), 'd'
+2024-12-14 12:17:58,449 DEBUG xhtml2pdf.tags Parsing img tag, src: <xhtml2pdf.files.pisaFileObject object at 0x0000026F3D36F8E0>
+2024-12-14 12:17:58,449 DEBUG xhtml2pdf.tags Attrs: {'src': <xhtml2pdf.files.pisaFileObject object at 0x0000026F3D36F8E0>, 'width': 225.0, 'height': None, 'align': None, 'id': None}
+2024-12-14 12:17:58,449 DEBUG xhtml2pdf.files Unrecognized scheme, assuming local file path
+2024-12-14 12:17:58,849 DEBUG xhtml2pdf.tables Col 0 has width 80%
+2024-12-14 12:17:58,853 DEBUG xhtml2pdf.tables Col 1 has width 20%
+2024-12-14 12:17:58,855 DEBUG xhtml2pdf.tables Col widths: ['80%', '20%']
+2024-12-14 12:17:58,865 DEBUG xhtml2pdf.tables Col 0 has width 10%
+2024-12-14 12:17:58,865 DEBUG xhtml2pdf.tables Col 1 has width 70%
+2024-12-14 12:17:58,866 DEBUG xhtml2pdf.tables Col 2 has width 20%
+2024-12-14 12:17:58,868 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,868 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,870 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,871 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,871 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,872 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,875 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,876 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,877 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,878 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,878 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,880 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,881 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,881 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,882 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,883 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,884 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,885 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,886 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,886 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,888 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,889 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,889 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,891 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,894 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,894 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,898 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,900 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,900 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,901 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,902 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,902 DEBUG xhtml2pdf.tables Col 0 has width 0
+2024-12-14 12:17:58,903 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,904 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,905 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,905 DEBUG xhtml2pdf.tables Col 0 has width 0
+2024-12-14 12:17:58,905 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,907 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,908 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,908 DEBUG xhtml2pdf.tables Col 0 has width 0
+2024-12-14 12:17:58,908 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,910 DEBUG xhtml2pdf.tables None
+2024-12-14 12:17:58,910 DEBUG xhtml2pdf.tables Col widths: ['10%', '70%', '20%']
+2024-12-14 12:17:58,914 DEBUG xhtml2pdf.files FileObject 'media/company/company_logos/signature.png', Basepath: 'D:\\python\\GC_Enterprise\\__dummy__'
+2024-12-14 12:17:58,914 DEBUG xhtml2pdf.files URLParts: ParseResult(scheme='d', netloc='', path='\\python\\GC_Enterprise\\__dummy__', params='', query='', fragment=''), 'd'
+2024-12-14 12:17:58,914 DEBUG xhtml2pdf.tags Parsing img tag, src: <xhtml2pdf.files.pisaFileObject object at 0x0000026F3D373970>
+2024-12-14 12:17:58,914 DEBUG xhtml2pdf.tags Attrs: {'src': <xhtml2pdf.files.pisaFileObject object at 0x0000026F3D373970>, 'width': 225.0, 'height': None, 'align': None, 'id': None}
+2024-12-14 12:17:58,915 DEBUG xhtml2pdf.files Unrecognized scheme, assuming local file path
+2024-12-14 12:17:58,946 DEBUG PIL.PngImagePlugin STREAM b'IHDR' 16 13
+2024-12-14 12:17:58,946 DEBUG PIL.PngImagePlugin STREAM b'sRGB' 41 1
+2024-12-14 12:17:58,946 DEBUG PIL.PngImagePlugin STREAM b'gAMA' 54 4
+2024-12-14 12:17:58,946 DEBUG PIL.PngImagePlugin STREAM b'pHYs' 70 9
+2024-12-14 12:17:58,946 DEBUG PIL.PngImagePlugin STREAM b'IDAT' 91 9701
+2024-12-14 12:17:59,016 DEBUG PIL.PngImagePlugin STREAM b'IHDR' 16 13
+2024-12-14 12:17:59,017 DEBUG PIL.PngImagePlugin STREAM b'sRGB' 41 1
+2024-12-14 12:17:59,017 DEBUG PIL.PngImagePlugin STREAM b'gAMA' 54 4
+2024-12-14 12:17:59,017 DEBUG PIL.PngImagePlugin STREAM b'pHYs' 70 9
+2024-12-14 12:17:59,017 DEBUG PIL.PngImagePlugin STREAM b'IDAT' 91 9701
+2024-12-14 12:17:59,115 DEBUG PIL.PngImagePlugin STREAM b'IHDR' 16 13
+2024-12-14 12:17:59,116 DEBUG PIL.PngImagePlugin STREAM b'sRGB' 41 1
+2024-12-14 12:17:59,116 DEBUG PIL.PngImagePlugin STREAM b'gAMA' 54 4
+2024-12-14 12:17:59,116 DEBUG PIL.PngImagePlugin STREAM b'pHYs' 70 9
+2024-12-14 12:17:59,116 DEBUG PIL.PngImagePlugin STREAM b'IDAT' 91 9701
+2024-12-14 12:17:59,130 INFO orders.models PDF saved successfully for Document [ID: 3] at documents/2024/Angebot/24-002-Angebot-2024-12-14.pdf.
+2024-12-14 12:17:59,211 INFO orders.models PDF successfully created for Document [ID: 3] at documents/2024/Angebot/24-002-Angebot-2024-12-14.pdf.

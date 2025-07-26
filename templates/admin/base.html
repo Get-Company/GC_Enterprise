@@ -1,0 +1,9 @@
+{% extends "admin/base.html" %}  {# Unfolds Admin Base Template erweitern #}
+{# base.html wird erweitert um das localie tag einzufügen #}
+{% load l10n %}
+
+{% block content %}
+    {% localize on %}
+        {{ block.super }}
+    {% endlocalize %}
+{% endblock %}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Variablen Dokumentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .model {
+            margin-bottom: 20px;
+        }
+        .attribute {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+{% verbatim %}
+<h1>Template Variablen Dokumentation</h1>
+<p>Diese Dokumentation beschreibt die verfügbaren Variablen für das <strong>Document</strong>, <strong>Projekt</strong> und <strong>Kunden</strong>, sowie deren Attribute. Du kannst diese Variablen in deinen Templates mit <code>{{ }}</code> verwenden.</p>
+
+<h2>Allgemeine Syntax</h2>
+<ul>
+    <li><code>{{ variable }}</code>: Gibt den Wert einer Variable aus.</li>
+    <li><code>{% if condition %}</code>: Überprüft eine Bedingung. Nutze <code>{% endif %}</code>, um den Block zu schließen.</li>
+</ul>
+
+<h2>Modelle und ihre Attribute</h2>
+
+<div class="model">
+    <h3>1. Document</h3>
+    <p>Repräsentiert ein Dokument innerhalb eines Projekts.</p>
+    <div class="attribute">
+        <p><code>{{ document.order }}</code>: Das zugehörige Projekt (vom Typ <strong>Order</strong>).</p>
+        <p><code>{{ document.document_type }}</code>: Der Dokumenttyp (z. B. "Rechnung").</p>
+        <p><code>{{ document.file_path }}</code>: Der Pfad zur Datei.</p>
+        <p><code>{{ document.introduction }}</code>: Einleitungstext des Dokuments.</p>
+        <p><code>{{ document.description }}</code>: Beschreibung des Dokuments.</p>
+        <p><code>{{ document.conclusion }}</code>: Abschluss des Dokuments.</p>
+    </div>
+</div>
+
+<div class="model">
+    <h3>2. Projekt</h3>
+    <p>Repräsentiert ein Projekt innerhalb des Systems.</p>
+    <div class="attribute">
+        <p><code>{{ order.name }}</code>: Der Name des Projekts.</p>
+        <p><code>{{ order.nr }}</code>: Die Auftragsnummer.</p>
+        <p><code>{{ order.customer }}</code>: Der zugehörige Kunde (vom Typ <strong>Customer</strong>).</p>
+        <p><code>{{ order.description }}</code>: Beschreibung des Projekts.</p>
+        <p><code>{{ order.hourly_rate }}</code>: Der Stundensatz.</p>
+        <p><code>{{ order.flat_rate }}</code>: Die Pauschale.</p>
+        <p><code>{{ order.total_net }}</code>: Gesamtnetto-Betrag.</p>
+        <p><code>{{ order.total_vat }}</code>: Mehrwertsteuerbetrag.</p>
+        <p><code>{{ order.total_gross }}</code>: Gesamtbruttobetrag.</p>
+    </div>
+</div>
+
+<div class="model">
+    <h3>3. Customer</h3>
+    <p>Repräsentiert einen Kunden.</p>
+    <div class="attribute">
+        <p><code>{{ customer.name }}</code>: Der Name des Kunden.</p>
+        <p><code>{{ customer.street }}</code>: Die Straße.</p>
+        <p><code>{{ customer.house_number }}</code>: Die Hausnummer.</p>
+        <p><code>{{ customer.postal_code }}</code>: Die Postleitzahl.</p>
+        <p><code>{{ customer.city }}</code>: Die Stadt.</p>
+        <p><code>{{ customer.email }}</code>: Die E-Mail-Adresse.</p>
+        <p><code>{{ customer.phone }}</code>: Die Telefonnummer.</p>
+        <p><code>{{ customer.vat_id }}</code>: Die Umsatzsteuer-Identifikationsnummer.</p>
+    </div>
+</div>
+
+<h2>Beispiele</h2>
+<p>Du kannst die Variablen in deinen Templates wie folgt verwenden:</p>
+<pre><code>{% if order.total_net > 1000 %}Das Projekt ist groß.{% endif %}</code></pre>
+<pre><code>{{ customer.name }} aus {{ customer.city }} hat das Dokument {{ document.document_type }} erhalten.</code></pre>
+{% endverbatim %}
+</body>
+</html>

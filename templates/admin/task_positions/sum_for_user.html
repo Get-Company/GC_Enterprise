@@ -1,0 +1,17 @@
+ <!-- Lade den humanize-Filter für intcomma -->
+{% load humanize %}
+<div style="margin-top:50px; margin-bottom: 20px;">
+
+    <h3 style="margin-bottom: 10px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+        Stundenübersicht vom {{ start_date }} {% if end_date %} - {{ end_date }}{% endif %}
+    </h3>
+    <p>
+        Bis jetzt sind <strong>{{ total_hours_worked }}h</strong> eingetragen.
+    {{ original }}
+        {% for hoursworked in original.hours_worked %}
+            <br/>
+            {{ hoursworked.task.name }}: {{ hoursworked.hours_worked|floatformat:2 }}h
+        {% endfor %}
+    </p>
+
+</div>

@@ -1,0 +1,199 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: a4 portrait;
+            @frame header_frame {
+            -pdf-frame-content: header_content;
+            left: 2cm;
+            width: 17cm;
+            top: 1cm;
+            height: 6cm;
+        }
+            @frame content_frame {
+            left: 2cm;
+            width: 17cm;
+            top: 7cm;
+            height: 17cm;
+        }
+            @frame footer_frame {
+            -pdf-frame-content: footer_content;
+            left: 2cm;
+            width: 17cm;
+            top: 25cm;
+            height: 4cm;
+        }
+        }
+        body {
+            font-size: 14px;
+        }
+        #order_company {
+            font-size: 12px;
+            color: #888888;
+            margin-top: 40px;
+        }
+        #footer_content {
+            color: #888888;
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div id="header_content">
+    {% if order.company.logo %}
+    <img width="300px" style="text-align:right" src="media/{{ order.company.logo }}" alt="{{ order.company.name }}">
+    {% endif %}
+    <p id="order_company">
+        {{ order.company.name }} {{ order.company.contact_person.first_name }} {{ order.company.contact_person.last_name }}<br/>
+        {{ order.company.street }} {{ order.company.zip_code }} {{ order.company.city }} {{ order.company.country }}
+    </p>
+</div>
+
+<!-- Footer -->
+<div id="footer_content">
+    <table>
+        <tr>
+            <td width="80%">
+                <p>
+                    {{ order.company.name }}
+                    {% if order.company.court_register %} | {{ order.company.court_register }}{% endif %}
+                    {% if order.company.court %} | {{ order.company.court }}{% endif %}
+                    {% if order.company.contact_person %} | {{ order.company.contact_person.role }} {{ order.company.contact_person.first_name }} {{ order.company.contact_person.last_name }}{% endif %}
+                    <br/>
+                    {{ order.company.street }} | {{ order.company.postal_code }} {{ order.company.city }} | {{ order.company.country }}
+                    <br/>
+                    Tel.<a href="tel:{{ order.company.phone_number }}">{{ order.company.phone_number }}</a> |
+                    E-Mail: <a href="mailto:{{ order.company.email }}">{{ order.company.email }}</a>
+                </p>
+            </td>
+            <td width="20%" style="text-align: right; vertical-align: bottom;">
+                Seite <pdf:pagenumber> von <pdf:pagecount>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Main Content -->
+<p>
+    An:<br/>
+    {{ customer.name }}<br/>
+    {% if customer.customer_contacts and customer.get_default_contact() %}
+        <strong>
+            {% set contact = customer.get_default_contact() %}
+            zH. {{ contact.position }} {{ contact.name }}<br/>
+        </strong>
+    {% endif %}
+    {{ customer.street }} {{ customer.house_number }}<br/>
+    {{ customer.postal_code }} {{ customer.city }}<br/>
+    <strong>{{ customer.country }}</strong>
+</p>
+<p style="text-align: right;">
+    {{ order.company.city }} am {{ order.updated_at|german_date("%a, den %d.%b.%Y") }}
+</p>
+<p><strong>{{ order.name }}</strong></p>
+{{ document.introduction }}
+
+<!-- Tabelle -->
+<table style="border: thin solid #888;" width="100%" cellpadding="5" border="1">
+    <tr>
+        <th width="10%">Pos</th>
+        <th width="70%">Beschreibung</th>
+        <th width="20%">Kosten [€] netto</th>
+    </tr>
+    {% set ns = namespace (row_index = 0) %} <!-- Initialisierung des globalen Index -->
+
+    <!-- Gruppierte Phasen -->
+    {% set show_group_headers = grouped_phases|length > 1 %}
+    {% for fee_group_name, phases in grouped_phases.items() %}
+        <!-- Gruppenüberschrift (nur anzeigen, wenn es mehrere Gruppen gibt) -->
+        {% if show_group_headers %}
+            <tr>
+                <td colspan="3"><strong>{{ fee_group_name }}</strong></td>
+            </tr>
+        {% endif %}
+
+        <!-- Einträge der Gruppe -->
+        {% for phase in phases %}
+            {% set ns.row_index = ns.row_index + 1 %}
+            <tr>
+                <td>{{ ns.row_index }}</td>
+                <td>{{ phase.service_phase.lph }}:{{ phase.name }}</td>
+                <td style="text-align: right">{{ phase.sum_amount|currency }}</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+
+    <!-- Rabatt -->
+    {% if order.sum_total_rebate_service_phases %}
+        {% set ns.row_index = ns.row_index + 1 %}
+        <tr>
+            <td>{{ ns.row_index }}</td>
+            <td>Nachlass</td>
+            <td style="text-align: right">- {{ order.sum_total_rebate_service_phases|currency }}</td>
+        </tr>
+    {% endif %}
+
+    <!-- Besondere Leistungen -->
+    {% if order.line_items %}
+        {% for line_item in order.line_items.all() %}
+            {% set ns.row_index = ns.row_index + 1 %}
+            <tr>
+                <td>{{ ns.row_index }}</td>
+                <td>{{ line_item.name }}</td>
+                <td style="text-align: right">{{ line_item.amount|currency if line_item.amount else '-' }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Nebenkosten -->
+    {% if order.additional_costs %}
+        {% set ns.row_index = ns.row_index + 1 %}
+        <tr>
+            <td>{{ ns.row_index }}</td>
+            <td>Nebenkosten pauschal {{ order.additional_costs }}%</td>
+            <td style="text-align: right">{{ order.total_additional_costs|currency }}</td>
+        </tr>
+    {% endif %}
+
+    <!-- Fahrtkosten -->
+    {% if order.km %}
+        {% set ns.row_index = ns.row_index + 1 %}
+        <tr>
+            <td>{{ ns.row_index }}</td>
+            <td>Fahrtkosten {{ order.km }} km x {{ order.km_cost|currency }} €</td>
+            <td style="text-align: right">{{ order.total_km_costs|currency }}</td>
+        </tr>
+    {% endif %}
+
+    <!-- Summen -->
+    <tr>
+        <td></td>
+        <td><strong>Summe netto</strong></td>
+        <td style="text-align: right">{{ order.total_net|currency }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><strong>MwSt. {{ order.vat.name }}</strong></td>
+        <td style="text-align: right">{{ order.total_vat|currency }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><strong>Summe brutto</strong></td>
+        <td style="text-align: right">{{ order.total_gross|currency }}</td>
+    </tr>
+</table>
+
+
+<!-- Schluss -->
+{% if document.conclusion %}
+    {{ document.conclusion }}
+
+{% endif %}
+<p>Mit freundlichen Grüßen</p>
+<p>
+    <img width="300px" src="media/{{ order.company.signature }}" alt="{{ order.company.name }}"><br/>
+    {{ order.company.contact_person.first_name }} {{ order.company.contact_person.last_name }}
+</p>
+</body>
+</html>
