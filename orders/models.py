@@ -36,6 +36,8 @@ from drafthorse.models.note import IncludedNote
 from drafthorse.models.party import TaxRegistration
 from drafthorse.models.tradelines import LineItem
 from drafthorse.pdf import attach_xml
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 import logging
 logger = logging.getLogger(__name__)
@@ -91,7 +93,7 @@ class ServicePhase(GcAbstractModel):
     name = models.CharField(max_length=100, verbose_name="Name")
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
     percent = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Prozentwert")
-    fee_group = models.ForeignKey('FeeGroup', on_delete=models.CASCADE, verbose_name="Honorarklasse")
+    fee_group = models.ForeignKey('FeeGroup', blank=True, null=True, on_delete=models.CASCADE, verbose_name="Honorarklasse")
 
     def __str__(self):
         return f"{self.fee_group}-{self.lph} {self.name}"
@@ -107,7 +109,22 @@ class ServicePhase(GcAbstractModel):
 """ Document """
 
 class DocumentType(GcAbstractModel):
+    DOCUMENT_TYPE_CHOICES = [
+        ('invoice', 'Rechnung'),
+        ('partial_invoice', 'Teilrechnung'),
+        ('final_invoice', 'Abschlussrechnung'),
+        ('offer', 'Angebot'),
+        ('custom', 'Individuell'),
+    ]
     name = models.CharField(max_length=100, verbose_name="Dokumenttyp")
+    type_code = models.CharField(
+        max_length=50,
+        choices=DOCUMENT_TYPE_CHOICES,
+        unique=True,
+        blank=True, null=True,
+        verbose_name="Interner Typ-Code",
+        help_text="Eindeutiger Code für die interne Verarbeitung (z.B. partial_invoice, final_invoice)"
+    )
     description = models.TextField(blank=True, null=True, verbose_name="Beschreibung")
     book_tasks = models.BooleanField(default=False, verbose_name="Tasks automatisch buchen?")
 
@@ -436,6 +453,46 @@ class Document(GcAbstractModel):
         verbose_name = "Dokument"  # Singularform für das Modell
         verbose_name_plural = "Dokumente"  # Pluralform für das Model
 
+class ManualInvoiceItem(GcAbstractModel):
+    document = models.ForeignKey(
+        'Document',
+        on_delete=models.CASCADE,
+        related_name='manual_items',
+        verbose_name="Dokument",
+    )
+    name = models.TextField(verbose_name="Bezeichnung")
+    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Betrag (€)")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Manuelle Position"
+        verbose_name_plural = "Manuelle Positionen"
+
+class DocumentCostItem(GcAbstractModel):
+    document = models.ForeignKey(
+        'Document',
+        on_delete=models.CASCADE,
+        related_name='cost_items',
+        verbose_name="Dokument",
+    )
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    cost_object = GenericForeignKey('content_type', 'object_id')
+    invoiced_percent = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        verbose_name="Abgerechneter Anteil (%)",
+    )
+
+    def __str__(self):
+        return f"{self.cost_object} - {self.invoiced_percent}%"
+
+    class Meta:
+        verbose_name = "Abgerechneter Kostenträger"
+        verbose_name_plural = "Abgerechnete Kostenträger"
+
 @receiver(post_save, sender=Document)
 def link_related_items_on_document_save(sender, instance, created, **kwargs):
     """
@@ -583,6 +640,7 @@ class Order(GcAbstractModel):
         blank=True,
         null=True
     )
+    # Stundenlohn
     hourly_rate = models.DecimalField(
         max_digits=6,
         decimal_places=2,
@@ -590,6 +648,7 @@ class Order(GcAbstractModel):
         blank=True,
         verbose_name="Stundensatz"  # Klare und kurze Bezeichnung für den Stundensatz
     )
+    # Pauschale
     flat_rate = models.DecimalField(
         max_digits=10,
         decimal_places=2,
